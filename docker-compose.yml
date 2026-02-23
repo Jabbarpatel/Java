@@ -2,14 +2,28 @@ services:
   backend:
     build: .
     ports:
-      - "8080:8080"
+      - "9005:9005"
     volumes:
-      - ./src:/user-management/backend/src
-      - ./pom.xml:/user-management/backend/pom.xml
+      - .:/user-management/backend
     restart: always
 
   db:
-  
+    image: mysql:8.0
+    restart: always
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: user_management
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8086:80"
 
 networks:
-  driver: default
+  default:
+    driver: bridge

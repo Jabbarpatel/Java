@@ -6,8 +6,6 @@ ADD pom.xml /user-management/backend/
 
 RUN mvn dependency:go-offline -B
 
-ADD src /user-management/backend/src
-
 EXPOSE 8080
 
 CMD ["mvn", "spring-boot:run"]
