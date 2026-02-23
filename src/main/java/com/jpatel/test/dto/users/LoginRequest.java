@@ -1,10 +1,9 @@
 package com.jpatel.test.dto.users;
 
-public class SignInRequest {
+public class LoginRequest {
 
     private String name;
     private String password;
-    private String role;
 
     public String getName() {
         return name;
@@ -12,10 +11,6 @@ public class SignInRequest {
 
     public String getPassword() {
         return password;
-    }
-
-    public String getRole() {
-        return role;
     }
 
 }

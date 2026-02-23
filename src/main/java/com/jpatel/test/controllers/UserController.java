@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jpatel.test.annotations.LoginRequired;
+import com.jpatel.test.dto.users.LoginRequest;
 import com.jpatel.test.dto.users.SignInRequest;
 import com.jpatel.test.entity.UserEntity;
 import com.jpatel.test.services.UserService;
@@ -24,6 +25,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping("/login")
+    public String postMethodName(@RequestBody LoginRequest request) {
+        String name = request.getName();
+        String password = request.getPassword();
+        userService.handleLogin(name, password);
+        return "success";
+    }
+
     @LoginRequired
     @GetMapping("/getusers")
     public ResponseEntity<List<UserEntity>> Test() {
@@ -34,9 +43,9 @@ public class UserController {
     @LoginRequired
     @PostMapping("/signIn")
     public ResponseEntity<String> postMethodName(@RequestBody SignInRequest request) {
-        String name = request.name;
-        String password = request.password;
-        String role = request.role;
+        String name = request.getName();
+        String password = request.getPassword();
+        String role = request.getRole();
         userService.handleSignIn(name, password);
         return ResponseEntity.status(200).body("success");
     }
